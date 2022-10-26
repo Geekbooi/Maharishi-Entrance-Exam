@@ -1,0 +1,731 @@
+package pretest;
+
+import java.util.Arrays;
+
+public class Pretest{
+	static int isEvens(int n){
+		while(n>0){
+			int x;
+			x=n%10;
+			if(x%2!=0)
+				return 0;
+			n=n/10;
+		}
+		return 1;
+	}
+	static int isMagicArray(int[] a) {
+		int sum=0;
+		for(int x : a){
+				if(isPrime(x) && x>1)
+					sum+=x;
+		}
+		if(sum==a[0])
+			return 1;
+		return 0;
+		}
+	static int isCompelete(int[] a) {
+		int min=0;
+		int max=0;
+		int evencount=0;
+		for(int i=0; i<a.length; i++) {
+			if(a[i]%2==0) {
+				max=a[i];
+				min=a[i];
+				break;
+			}
+		}
+		System.out.println(max);
+		for(int i=0; i<a.length; i++) {
+			if(a[i]%2==0) {
+				evencount++;
+				if(a[i]>max)
+					max=a[i];
+				if(a[i]<min)
+					min=a[i];
+			}
+		}
+		if(evencount<1 && max==min)
+			return 0;
+		
+		int x=max-min-1;
+		int count=0;
+		int y= min +1;
+		for(int m=0; m<a.length; m++) {
+				if(y==a[m] && y<max) {
+					count++;
+					y++;
+					m=-1;
+				}
+		}
+	
+		if(x!=count)
+			return 0;
+		return 1;	
+	}
+	static int isPrimeProduct(int n) {
+		for(int i=2; i<n; i++) {
+			if(n%i==0 && isPrime(i)) {
+				for(int j=i+1; j<n; j++) {
+					if(n%j==0 && isPrime(j)) {
+						if(i*j==n) {
+							return 1;
+						}
+					}
+				}
+			}
+		}
+		return 0;
+	}
+	static int isBalanced(int[] a) {
+		for(int i=0; i<a.length; i++) {
+			if((a[i]%2) != (i%2))
+				return 0; 
+		}
+		return 1;
+	}
+	static int isCentered(int[] a) {
+		if(a.length%2==0)
+			return 0;
+		int midindex=a.length/2;
+		int midvalue=a[midindex];
+		for(int i=0; i<a.length; i++) {
+			if(a[i]<=midvalue && i>midindex )
+				return 0;
+		}
+		return 1;
+	}
+	static int hasKSmallFactors(int k, int n) {
+		boolean check=false;
+		if(n<=0 || k<=0)
+			check=false;
+		for(int i=1; i<k; i++) {
+			if(n%i==0) {
+				for(int j=i+1; j<k; j++) {
+					if(n%j==0) {
+						if(i*j==n)
+							check=true;
+					}
+				}
+			}
+		}
+		if(check)
+			return 1;
+		return 0;
+	}
+	static int isDigitSum(int n, int m) {
+		if(n<0)
+			return -1;
+		int sum=0;
+		while(n>0) {
+			int x=n%10;
+			sum+=x;
+			n=n/10;
+		}
+		if(sum<m)
+			return 1;
+		return 0;
+	}
+	static int istwinoid(int [] a) {
+		int count=0;
+		for(int i=0; i<a.length-1; i++) {
+			if(a[i]%2==0) {
+				if(a[i+1]%2==0) {
+					count++;
+				}
+			}
+		}
+		if(count==1)
+			return 1;
+		return 0;
+	}
+	static int isPrimeChecker(int n, int m) {
+		int count=0;
+		for(int i=n; i<m; i++) {
+			if(isPrime(i)) {
+				count++;
+			}
+		}
+		return count;
+	}
+	static int upCount(int[] a, int n) {
+        int i, sum = 0, count = 0, flag = 0;
+        for(i = 0; i < a.length ; i++) {
+            sum += a[i];
+            if(sum > n && flag == 0) {
+                ++count;
+                flag = 1;
+            }
+            if(sum <= n) flag = 0;
+        }
+        return count;
+    }
+	static int primeCount(int start, int end){
+		int count = 0;
+		if(start<2)
+			start=2;
+		for(int i = start; i <= end; i++){
+			if(isPrime(i))
+				count++;
+		}
+		return count;
+	}
+	static boolean isPrime(int n){
+		
+		for(int j=2; j<=n/2; j++) {
+			if(n%j==0) {
+				return false;
+			}
+		}
+		return true;
+	}
+	static int isComplete(int [] a) {
+		int max=0, count_n=0;
+		for(int i=0; i<a.length; i++) {
+			if(a[i]<0)
+				return 0;
+			if(a[i]%2==0) {
+				count_n++;
+				max=a[i];
+		}
+	}
+		if(count_n==0)
+			return 0;
+		for(int i=0; i<a.length; i++) {
+			if(a[i]%2==0) {
+				if(max<a[i]) {
+					max=a[i];
+				}
+			}
+			}
+		for(int i=2; i<max; i+=2) {
+			boolean isfound= false;
+			for(int j=0; j<a.length; j++) {
+				if(i==a[j]) {
+					isfound=true;
+				}	
+			}
+			if(!isfound)
+				return 0;
+		}
+		return 1;
+	}		
+	static int MadhavArray(int [] a) {
+		int i;
+		if(a.length<3)
+			return 0;
+		for( i=2 ; ; i++) {
+			int sum = i*(i+1)/2;
+			if(sum == a.length)
+				break;
+			if(sum > a.length)
+				return 0;
+			}
+		int pos=i, k=1;
+		for(int j=1; j<pos; j++) {
+			int sum=0;
+			for(int b=0; b<=j; b++) {
+				sum+=a[k++];
+			}
+			if(sum != a[0])
+				return 0;
+		}
+		return 1;
+	}
+	static int allPossibility(int [] a) {
+		int count=0;
+		if(a.length<1)
+			return 0;
+		for(int i=0; i<a.length; i++) {
+			for(int j=0; j<a.length; j++) {
+				if(a[i]==j)
+					count ++;
+			}
+		}
+		
+		if(count == a.length)
+			return 1;
+		return 0;
+	}
+	static int areAnagrams(char [] a1, char [] a2) {
+		if(a1.length!=a2.length)
+			return 0;
+		int count=0;
+		for(int i=0; i<a1.length; i++) {
+			for(int j=0; j<a2.length; j++) {
+				if(a1[i]==a2[j])
+					count ++;
+				    
+			}
+		}
+		if(count==a1.length)
+			return 1;
+		return count;
+	}
+	static int closestfibo(int a1) {
+		int a=1; 
+		int b, sum=0;
+		while(sum<=a1) {
+			for(b=1; ;) {
+				sum=a+b;
+				a=b;
+				b=sum;
+			}
+		}
+		if(sum==a1)
+			return 1;
+		return 0;
+	}
+	static int clusterArray(int [] a) {
+		int count=1;
+		int [] arr = new int [count] ;
+		int current=a[0];
+		arr[0]=current;
+		for (int i=1; i<a.length; i++){
+			if(current!=a[i]) {
+				current=a[i];
+				arr[count++] = a[i];
+			}
+		}
+		return arr;
+	}
+	static int ishollow (int [] a) {
+		int Lresult=0;
+		int Rresult=0;
+		for (int i=0, j=a.length-1; i<j; i++, j--) {
+				if(a[i]==0)
+					Lresult=1;
+				if(a[j]==0)
+					Rresult=1;
+					break;
+			}
+		if(Lresult==Rresult)
+			return 1;
+		return 0;
+	}
+	static int isNice(int[] a) {
+		
+        for(int i=0;i<a.length;i++){
+        	boolean isfound=false;
+            for(int j=0;j<a.length;j++){
+                if(a[i]==a[j]-1 || a[i]==a[j]+1){
+                    isfound=true;
+                    break;
+                                    
+                }
+            }
+            
+            if(!isfound)
+            	return 0;
+        }
+        
+        return 1;
+	}   
+	static int isSmart(int n) {
+		int sum=1;
+		for (int i=0;i<n; i++) {
+			sum+=i;
+			if(sum==n)
+				return 1;
+			else
+				if(sum>n){
+					break;
+				}
+		}
+		return 0;
+	}
+	static int isFilter(int[] i) {
+		int nine = 0, thirteen = 0, seven = 0, sixteen = 0, result = 0;
+		for (int j = 0; j < i.length; j++) {
+			if (i[j] == 9) {
+				nine = 1;
+				} 
+			else if (i[j] == 13) {
+				thirteen = 1;
+			} else if (i[j] == 7) {
+				seven = 1;
+			} else if (i[j] == 16) {
+				thirteen = 1;
+			}
+		}
+		if ((nine == 1 && thirteen == 1) || (nine == 0 && thirteen == 0)) {
+			result = 1;
+			}
+		if (seven == 1 && sixteen == 1) {
+			result = 0;
+		}
+		return result;
+		}
+	static int Sum_Digit(int n) {
+		int sum=0;
+		if(n<0)
+			n=n*-1;
+		while(n>0) {
+			int x=n%10;
+			sum+=x;
+			n=n/10;
+		}
+		return sum;
+	}
+	static int Setequal(int [] a, int [] b) {
+		 if (a.length == 0 && b.length == 0) return 1;
+		 else if (a.length == 0 && b.length > 0) return 0;
+	     else if (a.length > 0 && b.length == 0) return 0;
+		 
+		 for (int i=0; i<a.length; i++) {
+            boolean found = false;
+            for (int j=0; j<b.length; j++) {
+                if (a[i] == b[j]) {
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) return 0;
+        }
+
+        for (int i=0; i<b.length; i++) {
+            boolean found = false;
+            for (int j=0; j<a.length; j++) {
+                if (b[i] == a[j]) {
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) return 0;
+        }
+
+        return 1;
+    }
+	static int isMeera(int [] a) {
+		int sum=0;
+		boolean isfound= true;
+		for(int i=0; i<a.length; i++) {
+			sum+=a[i];
+			if(i<=a[i]) { 
+				isfound= false;
+				break;
+			}
+		}
+		if(sum==0 && isfound)
+			return 1;
+		return 0;
+}
+	static int isFancy(int n) {
+		int f1=1;
+		int f2=1;
+		int sum=0;
+		while(sum<=n) {
+			sum=3*f2 + 2*f1;
+			if(sum==n)
+				return 1;
+			f1=f2;
+			f2=sum;
+		}
+		return 0;
+	}	
+	static int isBean(int [] a) {
+		
+		for(int i=0; i<a.length; i++) {
+			boolean isfound= false;
+			for(int j=0; j<a.length; j++) {
+				if(a[i]==a[j]+1 || a[i]==a[j]-1) {
+					isfound = true;
+				}
+			}
+			if(!isfound)
+				return 0;
+		}
+		return 1;
+	}
+	static int isDual(int [] a) {
+		int sum= a[0] + a [1];
+		for(int i=2; i<a.length-1; i+=2) {
+			if(sum!= a[i] + a[i+1])
+				return 0;
+		}
+		return 1;
+	}
+	static int lasteven(int [] a) {
+		int lastindex=-1;
+		for(int i=a.length-1; i>=0; i--) {
+			if(a[i]%2==0) {
+				lastindex=i;
+				break;
+		}
+	}
+	return lastindex;
+	}
+	static int countMax(int [] a) {
+		int count=0, max=a[0];
+		for(int i=1; i<a.length; i++) {
+			if(max<a[i])
+				max=a[i];
+		}
+		for(int i=0; i<a.length; i++) {
+			if(max==a[i])
+				count++;
+		}
+		return count;
+	}
+	static int isbalancedarray(int[] a) {
+		for(int i=0; i<a.length; i++){
+			boolean isfound = false;
+			for(int j=0; j<a.length; j++) {
+				if(a[i]==-1*a[j]){
+					isfound=true;
+					break;
+				}
+			}
+		if(!isfound)
+			return 0;
+		
+		}
+		return 1;
+		}
+	static int minprimedistance(int n) {
+		int min=n;
+		int count=0;
+		for(int i=2; i<=n/2; i++){
+			if(n%i==0){
+				count++;
+				for(int j=i+1; j<=n/2; j++){
+					if(n%j==0 ){
+						if(min>j-i)
+							min = j-i;
+						else
+							break;
+						}
+					}
+				}
+		}                                                                                          
+		if(count==0)
+			return -1;
+		if(count==1)
+			return 0;
+		return min;
+		}
+	static int Factorequal(int []a) {
+		int sum=0;
+		for(int i=0; i<a.length; i++) {
+			if(a[i]>i)
+				return 0;
+			sum+=a[i];
+		}
+		if(sum!=0)
+			return 0;
+		return 1;
+	}
+	static int isDaphne(int [] a) {
+		int count=0, precount=0, postcount=0;
+		for(int i=0; i<a.length; i++) {
+			if(a[i]%2==0)
+				precount++;
+			else {
+				count++;
+				break;
+			}
+		}
+		for(int j=a.length-1; j>0; j--) {
+			if(a[j]%2==0)
+				postcount++;
+			else {
+				count++;
+				break;
+			}
+		}
+		if(count==0 || precount!=postcount)
+			return 0;
+		return 1;
+	}
+	static int sumDigit(int n) {
+		int sum=0;
+		if(n<0)
+			n*=-1;
+		while(n!=0) {
+			int x=n%10;
+			sum+=x;
+			n=n/10;
+		}
+		return sum;
+	}
+	static int lastEven(int [] a) {
+		
+		for (int i=a.length-1; i>=0; i--) {
+			if(a[i]%2==0)
+				return i;
+		}
+		return -1;
+	}
+	static int evenSubset(int m, int n) {
+		for(int i=2; i<m; i+=2) {
+			if(m%i==0) {
+				if(n%i!=0)
+					return 0;
+			}
+		}
+		return 1;
+	}
+	static int isSym(int [] a) { 
+		for(int i=0, j=a.length-1; i<j; i++,j--) {
+			if((a[i]%2) != (a[j]%2))
+				return (0);
+			}
+			return (1);	
+		}
+	static int getexponent(int n, int p) {
+		if(n<0)
+			n*=-1;
+		if(p<=1)
+			return -1;
+		int count = 0;
+		while(n%p==0) {
+			count++;
+			n=n/p;
+		}
+		return count;
+	}
+	static int isMera(int [] a) {
+		boolean foundzero=false, foundprime=false;
+		for(int i=0; i<a.length; i++) {
+			if(a[i]==0)
+				foundzero=true;
+			if(isPrime(a[i]) && a[i]>1)
+				foundprime=true;
+		}
+		if((foundzero && foundprime) || (!foundzero && !foundprime))
+				return 1;
+		return 0;
+	}
+	static boolean SumIsPower(int [] a) {
+		int sum=0, power=2;
+		for(int i=0; i<a.length; i++) {
+			sum+=a[i];
+		}
+		while(sum>=power) {
+			if(sum==power)
+				return true;
+			power*=2;
+		}
+		return false;
+	}
+	static int maxOccurDigit(int n) {
+		 int maxCount = 0;
+	        int maxNumber = 0;
+	        if (n < 0) {
+	            n = n * (-1);
+	        }
+
+	        for (int i = 0; i <= 9; i++) {
+	            int num = n;
+	            int count = 0;
+	            while (num > 0) {
+	                if (num % 10 == i) {
+	                    count++;
+	                }
+	                num = num / 10;
+	            }
+	            if (count > maxCount) {
+	                maxCount = count;
+	                maxNumber = i;
+	            } 
+	            else if (count == maxCount) {
+	                maxNumber = -1;
+	            }
+	        }
+	        return maxNumber;
+	    }
+	static int isSuper(int [] a) {
+		int sum=0;
+		for(int i=0; i<a.length-1; i++) {
+			sum=sum+a[i];
+			if(sum>=a[i+1])
+				return 0;
+		}
+		return 1;
+	}
+	static int [ ] fill(int [] a, int k, int n) {
+		if(k<=0 || n<=0)
+			return null;
+		int [] arr = new int [n];
+		int x=0;
+		for (int i=0; i<n; i++) {
+			arr[i]=a[x];
+			x++;
+			if(x==k)
+				x=0;
+			}
+		return arr;
+	}
+	static int hasSingleMode(int [] array) {
+		  int popularity1 = 0;
+		    int popularity2 = 0;
+		    int popularity3 = 0;
+		    for (int i = 0; i < array.length; i++) {
+		      popularity1 = 0;
+		      for (int j = i ; j < array.length; j++) {
+		        if (array[i] == array[j]) 
+		          popularity1++;
+		      }
+		      if (popularity1 > popularity2) 
+		        popularity2 = popularity1;
+		      else if (popularity1 == popularity2) {
+		        popularity3 = popularity2;
+		      }
+		    }
+		    if (popularity3 == popularity2) 
+		      return 0;
+		   return 1;
+		  }
+	static int breakusage(int [] a) {
+		int count=0;
+		for(int i=0; i<a.length; i++) {
+			if(a[i]%2==0)
+				count++;
+			else
+				break;
+		}
+		return count;
+	}
+	public static void main(String args[]){
+   	int[] a= {4, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+   	//int[] b= {1,3,5,5,7,9,9,9,9};
+   	//int n=1;    	
+   
+		    	//char[] a3= {'p', 'o', 'l', 'l'};
+		    	//char[] a2= {'p', 'o', 'l', 'l'};
+   						//System.out.println(maxOccurDigit(35522));
+   						//System.out.println(hasSingleMode(array));
+   						//System.out.println(Arrays.toString(fill(a, 3, 10)));
+		    			//System.out.println(isMagicArray(a));
+		    			//System.out.println(isDaphne(a));
+		    			//System.out.println(maxOccurDigit(199035));
+		    			//System.out.println(lastEven(array));
+		    			//System.out.println(evenSubset(18, 12));
+		    			//System.out.println(isComplete(a));
+		    			//System.out.println(isPrimeProduct(22));
+		    			//System.out.println(isCentered(a));
+		    			//System.out.println(hasKSmallFactors(7, 30));
+		    			//System.out.println(isDigitSum(5554, 20));
+		    			//System.out.println(isbalancedarray(a));
+		    			//System.out.println(isSym(a));
+		    			//System.out.println(getexponent(128, 4));
+		    			//System.out.println(MadhavArray(a));
+		    			//System.out.println(isPrimeChecker(b));
+	      				//System.out.println(allPossibility(a));
+		    			//System.out.println(areAnagrams(a1, a2));
+		    			//System.out.println(closestfibo(31));
+		    			//System.out.println(clusterArray(a));
+		    			//System.out.println(ishollow(a));
+		    			//System.out.println(isFilter(a));
+		    			//System.out.println(sumDigit(123456));
+		    			//System.out.println(Setequal(a, b));
+		    			//System.out.println(isSmart(16));
+		    			//System.out.println(primeCount(0, 11));
+		    			//System.out.println(isComplete(a));
+		    			//System.out.println(isMeera(a));
+		    			//System.out.println(isEvens(2448));
+		    			//System.out.println(lasteven(b));
+		    			//System.out.println(countMax(b));
+		    			System.out.println(breakusage(a));
+		    			 //System.out.println(Factorequal(a));
+	}
+}
